@@ -1,2 +1,3 @@
-# Pr-cticas
-Trying
+# Practicas
+Probando entorno de desarrollo integrado
+
