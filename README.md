@@ -1,3 +1,4 @@
 # Practicas
-Probando entorno de desarrollo integrado
+Probando entornos de desarrollo integrado
+Probando Javascript y Typescript
 
