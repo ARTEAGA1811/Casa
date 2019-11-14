@@ -9,7 +9,7 @@ class Robot{
 }
 
 let miRobot = new Robot();
-miRobot.name = "David";
+miRobot.name = 'David';
 miRobot.apellido = "Arteaga";
 
 console.log(miRobot.saludar());
