@@ -1,0 +1,16 @@
+{
+  "name": "horariooptimizado",
+  "version": "1.0.0",
+  "description": "Proyecto Horario Optimizado",
+  "main": "index.js",
+  "scripts": {
+  "start": "(tsc proyecto.ts --target ES5|| echo) && node proyecto.js",
+  "falso": "(tsc falso.ts --target ES5|| echo) && node falso.js"
+  },
+  "author": "David Arteaga",
+  "license": "ISC",
+  "dependencies": {
+    "prompt": "^1.0.0",
+    "prompts": "^2.3.1"
+  }
+}
