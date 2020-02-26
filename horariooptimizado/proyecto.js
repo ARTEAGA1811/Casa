@@ -43,8 +43,8 @@ var prompts = require("prompts");
 /*PSEUDOCODIGO
 1. Iniciar creando la interfaz en donde se van a ubicar las horas, recomendable crear de cada hora.
 2. Pedir los respectivos datos al usuario e ingresarlos a un array.
-3.
-
+3. Luegogde que se hayan ingresado los respectivos datos al array deberia iniciar una comprobacion de cada tipo
+4. DEberia empezar por prioridades, entonces inicia con ingresar la primera Materia
 */
 function Principal() {
     return __awaiter(this, void 0, void 0, function () {
@@ -63,16 +63,23 @@ function Principal() {
                             message: '\nIngresa el nombre de la materia: '
                         },
                         {
-                            type: 'autocomplete',
-                            name: 'Dia',
-                            message: 'Ingresa el dia: ',
+                            type: 'text',
+                            name: 'Paralelo',
+                            message: 'Ingresa el paralelo: '
+                        },
+                        {
+                            type: 'autocompleteMultiselect',
+                            name: 'Dias',
+                            message: 'Ingresa los dias que tienes la materia: ',
                             choices: [
-                                { title: 'Lunes' },
-                                { title: 'Martes' },
-                                { title: 'Miercoles' },
-                                { title: 'Jueves' },
-                                { title: 'Viernes' }
-                            ]
+                                { title: 'Lunes', value: 'Lunes' },
+                                { title: 'Martes', value: 'Martes' },
+                                { title: 'Miercoles', value: 'Miercoles' },
+                                { title: 'Jueves', value: 'Jueves' },
+                                { title: 'Viernes', value: 'Viernes' }
+                            ],
+                            max: 3,
+                            hint: '-Space para seleccionar. Enter para enviar'
                         },
                         {
                             type: 'number',
@@ -95,7 +102,7 @@ function Principal() {
                         {
                             type: 'toggle',
                             name: 'Confirmacion',
-                            message: 'confirme sus datos: ',
+                            message: 'Confirme sus datos: ',
                             initial: true,
                             active: 'Todo correcto',
                             inactive: 'Puse mal un dato' // confirmar en caso que algo hayamos ingresado mal y toque repetir
@@ -104,6 +111,8 @@ function Principal() {
                     return [4 /*yield*/, prompts(Preguntas)];
                 case 2:
                     Respuestas = _a.sent();
+                    Respuestas.Materia = Respuestas.Materia.toUpperCase(); //Cambio las materias a mayusculas.
+                    Respuestas.Paralelo = Respuestas.Paralelo.toUpperCase(); //Cambio el curso a mayusculas.
                     if (Respuestas.Confirmacion == true) { //Si lo que ingresamos es correcto, se guarda la info ingresada en el array
                         DatosCompletosRecibidos.push(Respuestas);
                         //DatosClave.push(Respuestas.Materia, Respuestas.Dia, Respuestas.HoraDeInicio, Respuestas.HoraDeFinalizacion);

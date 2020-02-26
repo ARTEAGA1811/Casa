@@ -8,8 +8,8 @@ import { HorarioDeClases } from './EstructuraHorario';
 /*PSEUDOCODIGO
 1. Iniciar creando la interfaz en donde se van a ubicar las horas, recomendable crear de cada hora.
 2. Pedir los respectivos datos al usuario e ingresarlos a un array.
-3. 
-
+3. Luegogde que se hayan ingresado los respectivos datos al array deberia iniciar una comprobacion de cada tipo
+4. DEberia empezar por prioridades, entonces inicia con ingresar la primera Materia
 */
 
 
@@ -17,26 +17,33 @@ async function Principal(){
 
     //Crear una funcion que me itere las veces que yo decida, se guardara en un array.
     const  DatosCompletosRecibidos = [] // Aqui voy a guardar los datos
-   // const DatosClave = [];
-    let AgregarOtraMateria; //Iniciamos fuera del bucle while
+   
+    let AgregarOtraMateria; //Iniciamos fuera del bucle do while
     do{ // Uso el do para volver a ingresar mas materias en caso que se necesite
-        const Preguntas = [
+        let Preguntas = [
             {
                 type: 'text',
                 name: 'Materia',
                 message: '\nIngresa el nombre de la materia: '
             },
             {
-                type: 'autocomplete',
-                name: 'Dia',
-                message: 'Ingresa el dia: ',
+                type: 'text',
+                name: 'Paralelo',
+                message: 'Ingresa el paralelo: '
+            },
+            {
+                type: 'autocompleteMultiselect',
+                name: 'Dias',
+                message: 'Ingresa los dias que tienes la materia: ',
                 choices: [
-                    {title: 'Lunes'},
-                    {title: 'Martes'},
-                    {title: 'Miercoles'},
-                    {title: 'Jueves'},
-                    {title: 'Viernes'}
-                ]
+                    { title: 'Lunes', value: 'Lunes'},
+                    { title: 'Martes', value: 'Martes'},
+                    { title: 'Miercoles', value: 'Miercoles'},
+                    { title: 'Jueves', value: 'Jueves'},
+                    { title: 'Viernes', value: 'Viernes'}
+                ],
+                max: 3,
+                hint: '-Space para seleccionar. Enter para enviar'
             },
             {
                 type: 'number',
@@ -59,14 +66,17 @@ async function Principal(){
             {
                 type: 'toggle',
                 name: 'Confirmacion',
-                message: 'confirme sus datos: ',
+                message: 'Confirme sus datos: ',
                 initial: true,
                 active: 'Todo correcto',
                 inactive: 'Puse mal un dato' // confirmar en caso que algo hayamos ingresado mal y toque repetir
             }
         ];
-
+        
         const Respuestas = await prompts(Preguntas); // Se agregan las respuestas
+        
+        Respuestas.Materia = Respuestas.Materia.toUpperCase(); //Cambio las materias a mayusculas.
+        Respuestas.Paralelo = Respuestas.Paralelo.toUpperCase(); //Cambio el curso a mayusculas.
 
         if(Respuestas.Confirmacion == true){ //Si lo que ingresamos es correcto, se guarda la info ingresada en el array
             DatosCompletosRecibidos.push(Respuestas);
@@ -80,24 +90,12 @@ async function Principal(){
             initial: true,
             active: 'Si',
             inactive: 'No'
-        });
-        
-
-        
-        
-       
+        });  
         
     }while(AgregarOtraMateria.AgregaMateria == true ); //Se ejecutara mientras que se elija que se agregue otra materia
 
     console.log('\nLas materias que has elegido son: \n', DatosCompletosRecibidos);
-    //console.log('\nLos datos unidos son los siguientes: \n', DatosClave);
-
-    
-    
-
-
-
-
+   
 
     
 }
